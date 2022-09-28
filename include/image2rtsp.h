@@ -13,6 +13,7 @@ namespace image2rtsp {
 
         private:
       std::string port;
+      std::string ip_address;
             std::map<std::string, ros::Subscriber> subs;
             std::map<std::string, GstAppSrc*> appsrc;
             std::map<std::string, int> num_of_clients;

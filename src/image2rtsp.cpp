@@ -34,9 +34,11 @@ void Image2RTSPNodelet::onInit() {
     ROS_ASSERT(streams.getType() == XmlRpc::XmlRpcValue::TypeStruct);
     ROS_DEBUG("Number of RTSP streams: %d", streams.size());
     nh.getParam("port", this->port);
+    nh.param<std::string>("ip_address", this->ip_address, "0.0.0.0");
 
     video_mainloop_start();
   rtsp_server = rtsp_server_create(port);
+  gst_rtsp_server_set_address(rtsp_server, ip_address.c_str());
 
     // Go through and parse each stream
     for(XmlRpc::XmlRpcValue::ValueStruct::const_iterator it = streams.begin(); it != streams.end(); ++it)
